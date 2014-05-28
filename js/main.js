@@ -16,6 +16,12 @@ $(document).ready(function(){
 				async: true,
 				cache: false,
 				dataType: 'json',			
+				success: function(returnData) {
+					alert(returnData);
+				},
+				error: function() {
+					alert("fail");
+				}
 			}).promise();
 		}
 	};
