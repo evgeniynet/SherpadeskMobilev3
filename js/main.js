@@ -2,6 +2,7 @@ $(document).ready(function(){
 	
 	var userOrgKey = "";
 	var userOrg = "";
+	var userInstanceKey = "";
 	var	userKey = "xyjfvhjajkmcarswif5k0whm7hkhmfju";
 	
 	var org = {
@@ -23,6 +24,9 @@ $(document).ready(function(){
 				success: function(returnData) {
 					userOrgKey = returnData[0].key;
 					userOrg = returnData[0].name;
+					userInstanceKey = returnData[0].instances[0].key;
+					console.log("userInstanceKey "+userInstanceKey);
+					console.log(returnData);
 					$(".SherpaDesk").html(userOrg);
 				},
 				error: function() {
@@ -39,21 +43,22 @@ $(document).ready(function(){
 
 		getTicketCount: function() {
 			$.ajax({
-    type: 'GET',
-    beforeSend: function (xhr) {
-        xhr.setRequestHeader('Authorization', 
-                             'Basic ' + btoa(userKey));
-        },
-    url: 'http://api.beta.sherpadesk.com' + '/tickets/emmjf5',
-    data: {}, 
-    dataType: 'json',
-    success: function (d) {
-             alert('Success! Got ticket ' + d.subject);  
-    },
-    error: function (e, textStatus, errorThrown) {
-             alert(errorThrown);
-    }
- });
+				type: 'GET',
+				beforeSend: function (xhr) {
+					xhr.withCredentials = true;
+					xhr.setRequestHeader('Authorization', 
+                             'Basic ' + btoa(userOrgKey + '-' + userInstanceKey +':'+userKey));
+					},
+
+				url:"http://api.beta.sherpadesk.com/tickets/counts",
+				dataType:"json",
+				success: function() {
+					alert("worked");
+				},
+				error: function() {
+					alert("fail");
+				}
+			});
 		}
 	};
 
