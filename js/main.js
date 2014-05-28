@@ -10,9 +10,9 @@ $(document).ready(function(){
 				type: 'GET',
 				beforeSend: function (xhr) {
 					xhr.withCredentials = true;
-					xhr.setRequestHeader('Authorization', 'Basic ' + btoa('x:' + "https://x:xyjfvhjajkmcarswif5k0whm7hkhmfju"));
+					xhr.setRequestHeader('Authorization', 'Basic ' + btoa('x:' + "xyjfvhjajkmcarswif5k0whm7hkhmfju"));
 					},
-				url: 'https://x:xyjfvhjajkmcarswif5k0whm7hkhmfju@api.sherpadesk.com/organizations/',
+				url: 'http://api.sherpadesk.com/organizations/',
 				async: true,
 				cache: false,
 				dataType: 'json',			
