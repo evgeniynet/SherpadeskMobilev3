@@ -1552,6 +1552,10 @@ footer {
   margin-bottom: 10px;
 }
 
+.tableHeader li:last-child {
+
+}
+
 .tableRows li:first-child {
   text-align: left;
 }
@@ -1573,8 +1577,8 @@ footer {
 }
 
 .tableRows li:last-child {
-  text-align: right;
-  padding-right: 24px;
+  text-align: center;
+  
 }
 
 .tableRows li:first-child {
