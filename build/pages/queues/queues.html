@@ -1,0 +1,11 @@
+
+<ion-navbar *navbar><button menuToggle><ion-icon name="menu"></ion-icon></button>
+  <ion-title>Queues</ion-title>
+</ion-navbar>
+
+<ion-content class="queues">
+ <p class="general-alignment"></p>
+    <queues-list margin-top [queues]="queues" [simple]="true"></queues-list>
+    <span class="span-block"></span> 
+</ion-content>
+<action-button></action-button>

@@ -1,0 +1,11 @@
+
+<ion-navbar *navbar><button menuToggle><ion-icon name="menu"></ion-icon></button>
+  <ion-title class="padding-right24">ToDo's</ion-title>
+</ion-navbar>       
+<ion-content>                                                                                                                
+
+    <todo-list></todo-list>
+    
+     </ion-content>
+
+     <button (click)="AddTodo()" secondary item-right fab fab-right fab-bottom style="z-index: 2"><ion-icon class="button_circle action-but" name="md-add"></ion-icon></button>

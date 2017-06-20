@@ -1,0 +1,56 @@
+
+<ion-navbar *navbar>
+<ion-buttons start>
+    <button menuToggle><ion-icon name="menu"></ion-icon></button>
+      </ion-buttons>
+  <ion-title>Dashboard</ion-title>
+   <ion-buttons end>
+    <button danger class="right transparent" (click)="test = !test"><ion-icon name="ios-search"></ion-icon></button>
+    </ion-buttons>
+</ion-navbar>
+<ion-content class="dashboard">
+<ion-searchbar *ngIf="test" [focuser] debounce="700" (cancel)="test = !test" (input)="searchItems($event)" [(ngModel)]="term" placeholder="{{config.current.names.ticket.s}} number (2 chars) or Enter to search" (search)="getSearch($event)"></ion-searchbar>
+<img *ngIf="busy" class="imglogo" src="img/loading2.gif"/>
+ <ion-list class="ajax" [hidden]="!search_results">
+        <a detail-none href=# ion-item *ngFor="let item of search_results" (click)="gotoTicket(item)">
+            <h2>{{item.status}} | #{{item.number}} - {{item.subject}} ({{item.user_firstname}} {{item.user_lastname}})</h2>
+        </a>
+    </ion-list>
+    <ion-list class="list height" no-lines margin-top>
+        <div class="width50 left blue3 decoration_none">
+            <a detail-none href=# (click)="itemTappedTL({tab:'tech', count: counts.open_as_tech})" ion-item class="mainStat itemTech">{{counts.open_as_tech}}</a>
+     <a detail-none href=# (click)="itemTappedTL({tab:'tech', count: counts.open_as_tech})" ion-item class="itemTech">As {{config.current.names.tech.a}}</a>
+          </div>
+        <div class="width17 right blue3">
+            <a detail-none href=# ion-item (click)="itemTappedTL({tab:'user', count: counts.open_as_user})" class="itemTech" [innerHTML]="counts.open_as_user | More:[100,'<div class=item-inner><div class=input-wrapper><ion-label>VV</ion-label></div></div><ion-button-effect></ion-button-effect>']"></a>
+            <a detail-none href=# ion-item (click)="itemTappedTL({tab:'alt', count: counts.open_as_alttech})" class="itemTech" [innerHTML]="counts.open_as_alttech | More:[100,'<div class=item-inner><div class=input-wrapper><ion-label>VV</ion-label></div></div><ion-button-effect></ion-button-effect>']"></a>
+            <a detail-none href=# ion-item (click)="itemTappedTL({tab:'all', count: counts.open_all})" class="itemTech" [innerHTML]="counts.open_all | More:[100,'<div class=item-inner><div class=input-wrapper><ion-label>VV</ion-label></div></div><ion-button-effect></ion-button-effect>']"></a>
+         </div>
+    <div class="width33 right blue3 dashborder">
+    <a detail-none href=# ion-item (click)="itemTappedTL({tab:'user', count: counts.open_as_user})" class="itemTech dashboardRight dashboard font-size1 tkts-table">As {{config.current.names.user.a}}</a>
+    <a detail-none href=# ion-item (click)="itemTappedTL({tab:'alt', count: counts.open_as_alttech})" class="itemTech dashboardRight dashboard font-size1 tkts-table">Alt {{config.current.names.tech.a}}</a>
+    <a detail-none href=# ion-item (click)="itemTappedTL({tab:'all', count: counts.open_all})" class="itemTech dashboardRight dashboard font-size1 tkts-table">All Open</a>
+         </div>
+        <br>        
+         </ion-list>
+<br>
+
+    
+    <todo-list margin-top *ngIf="config.current.is_todos" [simple]="true"></todo-list>
+    
+    <queues-list margin-top class="container_list" *ngIf="config.current.is_unassigned_queue" [queues]="queues"></queues-list>
+        
+    
+    <!--ion-list class="list" *ngIf="config.current.is_account_manager">
+        <div *ngIf="accounts?.length" [class.hiddenviz]="simple" class="table">
+<span class="box1 box7 box5 box10">&nbsp;&nbsp;&nbsp;</span>
+            <span [ngClass]="{'box1 box7 box5 box10': !simple, 'box11 box7 box5 box10': simple}">&nbsp;&nbsp;&nbsp;</span>
+  <span class="box2 box7 box10">Hours</span>
+        <span class="box2 box7 box10">Expenses</span>
+        <span class="box4 box7 box6 box10">{{config.current.names.ticket.ap}}</span>
+    </div>
+        </ion-list-->
+    <accounts-list margin-top class="container_list"  *ngIf="config.current.is_account_manager" [simple]="simple" [accounts]="accounts"></accounts-list>
+    <span class="span-block"></span>
+</ion-content>
+<action-button></action-button>

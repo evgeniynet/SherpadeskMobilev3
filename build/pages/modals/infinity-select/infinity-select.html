@@ -1,0 +1,34 @@
+<ion-toolbar>
+<ion-buttons style="flex: 1;" start>
+<button (click)="dismiss()">
+            <span>Cancel</span>
+        </button>
+  </ion-buttons>
+    <ion-searchbar debounce="400" [(ngModel)]="term" (input)="searchItems($event)" placeholder="{{name}} (min 3 chars)" hideCancelButton="true"></ion-searchbar>  
+</ion-toolbar>
+
+
+<ion-content class="has-header">
+<img *ngIf="busy" class="imglogo img-padding" src="img/loading2.gif">
+    <ion-list class="list basic-list">
+        <a *ngIf="isdefault_enabled" detail-none href=# ion-item class="basic-margin text-left" (click)="dismiss({name: 'Default (no selection)', id: 0})">
+            <h2 class="color">Default (no selection)</h2>
+        </a>
+        <a *ngIf="isnew_enabled" detail-none href=# ion-item (click)="invite()">
+            <h2 class="color"> <ion-icon name="add-circle"></ion-icon>&nbsp;&nbsp;&nbsp;Invite new {{name}} {{is_empty ? '"'+term+'"' : ""}}</h2>
+        </a>
+        <a detail-none href=# ion-item class="basic-margin text-left" *ngFor="let item of items" (click)="dismiss(item)">
+            <h2 class="color">{{item.name}}</h2>
+        </a>
+
+    </ion-list>
+<div *ngIf="is_empty && !isdefault_enabled && !isnew_enabled" class="table grey2 menu-text">No {{name}} found yet</div>
+
+    <ion-infinite-scroll (infinite)="doInfinite($event)" threshold="30%">
+    <ion-infinite-scroll-content
+      loadingSpinner="circles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
