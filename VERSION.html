@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>HTML5</title>
+  <!--[if IE]>
+   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <style>
+   .b1 {
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  padding: .8em 1em calc(.8em + 3px);
+  border-radius: 3px;
+  background: rgb(64,199,129);
+  box-shadow: 0 -3px rgb(53,167,110) inset;
+  transition: 0.2s;
+  
+} 
+.b1:hover { background: rgb(53, 167, 110); }
+.b1:active {
+  background: rgb(33,147,90);
+  box-shadow: 0 3px rgb(33,147,90) inset;
+}
+  </style>
+ </head>
+ <body>
+ <script type="text/javascript">
+    var count=1;
+   function Count2(){
+    count++;
+    alert (count);
+    return count;
+   }
+   function JsWork(){
+    var url = 'ALERT.js?ver='+count;
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = url;
+            document.body.appendChild(script);
+   }
+
+ </script>
+ <CENTER>
+<button class="b1" type="button" onclick="Count2()">COUNT++</button>
+<br/>
+<br/>
+<button class="b1" type="button" onclick="JsWork()">JS Work</button>
+  </CENTER>
+  
+ </body>
+ <script type="text/javascript" src="ALERT.js?ver=1">
+</html>
